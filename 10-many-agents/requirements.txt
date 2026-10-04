@@ -1,0 +1,9 @@
+# The briefing agent for video 10. Install (Python 3.11+):  pip install -r requirements.txt
+# Pinned exactly: this repo promises the environment the video was captured in.
+# The two agents it hands work to run from their own folders, with their own
+# requirements: ../09-mcp-bridge/ and ../04-first-agent/currency-agent/.
+
+a2a-sdk==1.1.5
+httpx==0.28.1
+openai==3.19.2
+python-dotenv==1.2.3
