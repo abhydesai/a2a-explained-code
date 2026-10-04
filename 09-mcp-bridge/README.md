@@ -6,18 +6,17 @@ side changed. Same card, same clients, same task contract — the swap happens
 inside the agent's wall.
 
 `analyst.py` (56 lines), `ask.py` (36 lines) and `stream.py` (34 lines) are
-byte-identical to `06-task-life/`. `server.py` (58 lines) is 06's file plus one
-thing: it imports the analyst by name instead of by `import`, so `ANALYST` on the
-command line chooses which analyst runs. `CARD` is untouched — one skill,
-`http://127.0.0.1:9999`, and `streaming` as its only capability, which is the
-same card video 05 captured, byte for byte. That is the video's proof: the served
-side the viewer has been watching since 05 does not know its lookup moved.
+byte-identical to `06-task-life/`. `server.py` (54 lines) differs from 06's file
+by one word:
 
 ```python
-# The analyst is analyst.py, or the one named in ANALYST (analyst_mcp,
-# the same analyst with its lookup behind an MCP server).
-write_brief = import_module(os.environ.get("ANALYST", "analyst")).write_brief
+from analyst_mcp import write_brief     # 06 said: from analyst import write_brief
 ```
+
+That is the whole change on the served side. `CARD` is untouched — one skill,
+`http://127.0.0.1:9999`, and `streaming` as its only capability, which is the
+same card video 05 captured, byte for byte. The agent the viewer has been
+watching since 05 does not know its lookup moved.
 
 `mcp_server.py` (26 lines) is the stock server of MCP Explained in its own
 pattern — same import, `MCPServer("stocks")`, one `@mcp.tool()`, `mcp.run()` —
@@ -31,6 +30,9 @@ went `StdioServerParameters`, `list_tools` to ask the server what it offers, and
 appends that property to the schema the server describes, so each lookup still
 says why it was made. Nothing else in the loop changed.
 
+`analyst.py` stays in the folder because the video reads it as the before, next to
+`analyst_mcp.py`. Nothing imports it any more.
+
 The MCP server is never started by hand. `analyst_mcp.py` starts it as a stdio
 subprocess (`StdioServerParameters(command="python", args=["mcp_server.py"])`),
 so the only command on screen is the A2A server.
@@ -41,7 +43,7 @@ so the only command on screen is the A2A server.
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env                 # fill in LLM_API_KEY
-ANALYST=analyst_mcp python server.py # terminal 1: the lookup now comes over stdio
+python server.py                     # terminal 1: the lookup now comes over stdio
 ```
 
 ```bash
@@ -50,10 +52,6 @@ curl -s http://127.0.0.1:9999/.well-known/agent-card.json
 python ask.py http://127.0.0.1:9999 "How did Apple do over the last month?"
 python stream.py "How did Apple do over the last month, and was that just the market?"
 ```
-
-`python server.py` with no `ANALYST` runs the direct-lookup analyst of 05–08, for
-the before-and-after the video shows. The two runs are two tasks with two ids;
-nothing about them is the same task.
 
 The captures of this folder's sitting, with their provenance, are next door in
 `../a2a-explained/videos/09-mcp-bridge/assets/captures/`.

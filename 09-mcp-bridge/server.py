@@ -1,6 +1,4 @@
 """Serve the analyst over A2A: a card at its address, a task per message."""
-import os
-from importlib import import_module
 import uvicorn
 from dotenv import load_dotenv
 from starlette.applications import Starlette
@@ -11,9 +9,7 @@ from a2a.server.routes import create_agent_card_routes, create_jsonrpc_routes
 from a2a.server.tasks import InMemoryTaskStore, TaskUpdater
 from a2a.types import (AgentCapabilities, AgentCard, AgentInterface,
                        AgentSkill, TaskState)
-# The analyst is analyst.py, or the one named in ANALYST (analyst_mcp,
-# the same analyst with its lookup behind an MCP server).
-write_brief = import_module(os.environ.get("ANALYST", "analyst")).write_brief
+from analyst_mcp import write_brief
 
 CARD = AgentCard(
     name="Stock Analyst",
