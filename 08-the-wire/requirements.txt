@@ -1,0 +1,8 @@
+# The analyst, served over A2A. Install (Python 3.11+):  pip install -r requirements.txt
+# Pinned exactly: this repo promises the environment the video was captured in.
+
+a2a-sdk[http-server]==1.1.5
+uvicorn==0.53.0
+openai==3.19.2
+yfinance==1.7.0
+python-dotenv==1.2.3

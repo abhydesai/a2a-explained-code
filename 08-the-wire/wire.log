@@ -1,0 +1,1174 @@
+--> to agent
+GET /.well-known/agent-card.json HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:11 GMT
+server: uvicorn
+content-length: 583
+content-type: application/json
+
+{
+  "name": "Stock Analyst",
+  "description": "Writes a short brief on one stock over one period, from its price history.",
+  "supportedInterfaces": [
+    {
+      "url": "http://127.0.0.1:9999",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "version": "0.1.0",
+  "capabilities": {
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "stock-brief",
+      "name": "Stock brief",
+      "description": "Given a ticker and a period, fetch the price history and write a few sentences on what happened.",
+      "tags": [
+        "stocks"
+      ],
+      "examples": [
+        "How did Apple do over the last month?"
+      ]
+    }
+  ]
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 279
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "SendMessage",
+  "params": {
+    "message": {
+      "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+      "role": "ROLE_USER",
+      "parts": [
+        {
+          "text": "How did Apple do over the last month?"
+        }
+      ]
+    },
+    "configuration": {
+      "returnImmediately": true
+    }
+  },
+  "id": "6ae1e622-64e9-4cd9-8109-3a3ecb29922b",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:11 GMT
+server: uvicorn
+content-length: 460
+content-type: application/json
+
+{
+  "result": {
+    "task": {
+      "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+      "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+      "status": {
+        "state": "TASK_STATE_SUBMITTED"
+      },
+      "history": [
+        {
+          "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+          "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+          "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+          "role": "ROLE_USER",
+          "parts": [
+            {
+              "text": "How did Apple do over the last month?"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "id": "6ae1e622-64e9-4cd9-8109-3a3ecb29922b",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "28514125-1f9a-417b-b998-97d2e9f05030",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:12 GMT
+server: uvicorn
+content-length: 491
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "timestamp": "2026-10-04T05:35:12.501514Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "28514125-1f9a-417b-b998-97d2e9f05030",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "fb042da6-b110-4eb7-bc4b-c711fff12480",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:13 GMT
+server: uvicorn
+content-length: 491
+content-type: application/json
+
+
+<-- from agent
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "timestamp": "2026-10-04T05:35:12.501514Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "fb042da6-b110-4eb7-bc4b-c711fff12480",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "c585bc3b-a527-48dc-8219-25d92459963d",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:14 GMT
+server: uvicorn
+content-length: 491
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "timestamp": "2026-10-04T05:35:12.501514Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "c585bc3b-a527-48dc-8219-25d92459963d",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "b273395c-6de3-4a40-86e1-5f57d097fe27",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:15 GMT
+server: uvicorn
+content-length: 491
+content-type: application/json
+
+
+<-- from agent
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "timestamp": "2026-10-04T05:35:12.501514Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "b273395c-6de3-4a40-86e1-5f57d097fe27",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "3bf2bbee-456f-4e9c-996e-30c62bae213b",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:16 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+
+<-- from agent
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "3bf2bbee-456f-4e9c-996e-30c62bae213b",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "f4f69cff-327e-4b09-83c9-6c938dab0522",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:17 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+
+<-- from agent
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "f4f69cff-327e-4b09-83c9-6c938dab0522",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "0f62328c-83f7-4520-ad8f-a353b849f0a8",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:18 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "0f62328c-83f7-4520-ad8f-a353b849f0a8",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "10620297-63d4-49ea-abbc-a4d01fb51079",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:19 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "10620297-63d4-49ea-abbc-a4d01fb51079",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "e7712433-6fd0-4f96-8dec-b9e0cad24965",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:20 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+
+<-- from agent
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "e7712433-6fd0-4f96-8dec-b9e0cad24965",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "75208478-cc1c-4f72-9e83-b3cf8147b23b",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:21 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "75208478-cc1c-4f72-9e83-b3cf8147b23b",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "5e08cb5e-1593-4c80-a317-3fc077510eda",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:22 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "5e08cb5e-1593-4c80-a317-3fc077510eda",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "83a0f90f-2cbf-4cfb-ac8e-029e82f4ebd1",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:23 GMT
+server: uvicorn
+content-length: 780
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_WORKING",
+      "message": {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T05:35:16.731890Z"
+    },
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "83a0f90f-2cbf-4cfb-ac8e-029e82f4ebd1",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Content-Length: 135
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "GetTask",
+  "params": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431"
+  },
+  "id": "efd9aa06-1ba4-4417-bf61-27ff178ef666",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:24 GMT
+server: uvicorn
+content-length: 1152
+content-type: application/json
+
+{
+  "result": {
+    "id": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+    "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+    "status": {
+      "state": "TASK_STATE_COMPLETED",
+      "timestamp": "2026-10-04T05:35:25.679462Z"
+    },
+    "artifacts": [
+      {
+        "artifactId": "71fa458d-ef6c-4f67-ae27-22d8f2b9aa44",
+        "name": "brief",
+        "parts": [
+          {
+            "text": "Apple rose 1.7% over the month, from $328.21 on September 3 to $333.69 on October 2. It fell to a closing low of $315.34 on September 9, then climbed to a monthly closing high of $341.07 on September 25. It ended below that peak, giving back some of its late-September gains."
+          }
+        ]
+      }
+    ],
+    "history": [
+      {
+        "messageId": "99e1f982-9a83-42af-85c1-56320a429622",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "How did Apple do over the last month?"
+          }
+        ]
+      },
+      {
+        "messageId": "c15778b9-d1d9-48b3-a6c3-5ce71c9a5a84",
+        "contextId": "377eb011-837e-4dd7-adb6-96a1fd76ba6e",
+        "taskId": "4bd8caa3-c4ef-43d5-b390-d04161c14431",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "text": "fetching AAPL over 1mo: Summarize Apple's share-price performance over the last month"
+          }
+        ]
+      }
+    ]
+  },
+  "id": "efd9aa06-1ba4-4417-bf61-27ff178ef666",
+  "jsonrpc": "2.0"
+}
+
+--> to agent
+GET /.well-known/agent-card.json HTTP/1.1
+Host: 127.0.0.1:9999
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:25 GMT
+server: uvicorn
+content-length: 583
+content-type: application/json
+
+{
+  "name": "Stock Analyst",
+  "description": "Writes a short brief on one stock over one period, from its price history.",
+  "supportedInterfaces": [
+    {
+      "url": "http://127.0.0.1:9999",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "version": "0.1.0",
+  "capabilities": {
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "stock-brief",
+      "name": "Stock brief",
+      "description": "Given a ticker and a period, fetch the price history and write a few sentences on what happened.",
+      "tags": [
+        "stocks"
+      ],
+      "examples": [
+        "How did Apple do over the last month?"
+      ]
+    }
+  ]
+}
+
+--> to agent
+POST / HTTP/1.1
+Host: 127.0.0.1:9999
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+User-Agent: python-httpx/0.28.1
+A2A-Version: 1.0
+Accept: text/event-stream
+Cache-Control: no-store
+Content-Length: 264
+Content-Type: application/json
+
+
+--> to agent
+{
+  "method": "SendStreamingMessage",
+  "params": {
+    "message": {
+      "messageId": "99cf7d31-fdf8-492b-8dc5-0ed3f37dca7a",
+      "role": "ROLE_USER",
+      "parts": [
+        {
+          "text": "How did Apple do over the last month?"
+        }
+      ]
+    },
+    "configuration": {}
+  },
+  "id": "739f8aa8-0364-44b2-a583-68c2d321921a",
+  "jsonrpc": "2.0"
+}
+
+<-- from agent
+HTTP/1.1 200 OK
+date: Sun, 04 Oct 2026 05:35:25 GMT
+server: uvicorn
+cache-control: no-store
+connection: keep-alive
+x-accel-buffering: no
+content-type: text/event-stream; charset=utf-8
+Transfer-Encoding: chunked
+
+
+<-- from agent
+1ee
+data: {
+  "result": {
+    "task": {
+      "id": "156601dd-72f5-4784-b91d-58a03101ac5f",
+      "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+      "status": {
+        "state": "TASK_STATE_SUBMITTED"
+      },
+      "history": [
+        {
+          "messageId": "99cf7d31-fdf8-492b-8dc5-0ed3f37dca7a",
+          "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+          "taskId": "156601dd-72f5-4784-b91d-58a03101ac5f",
+          "role": "ROLE_USER",
+          "parts": [
+            {
+              "text": "How did Apple do over the last month?"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "id": "739f8aa8-0364-44b2-a583-68c2d321921a",
+  "jsonrpc": "2.0"
+}
+
+
+
+<-- from agent
+126
+data: {
+  "result": {
+    "statusUpdate": {
+      "taskId": "156601dd-72f5-4784-b91d-58a03101ac5f",
+      "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+      "status": {
+        "state": "TASK_STATE_WORKING",
+        "timestamp": "2026-10-04T05:35:25.922419Z"
+      }
+    }
+  },
+  "id": "739f8aa8-0364-44b2-a583-68c2d321921a",
+  "jsonrpc": "2.0"
+}
+
+
+
+<-- from agent
+24a
+data: {
+  "result": {
+    "statusUpdate": {
+      "taskId": "156601dd-72f5-4784-b91d-58a03101ac5f",
+      "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+      "status": {
+        "state": "TASK_STATE_WORKING",
+        "message": {
+          "messageId": "df786655-1153-415b-96e3-90ceedd58f8d",
+          "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+          "taskId": "156601dd-72f5-4784-b91d-58a03101ac5f",
+          "role": "ROLE_AGENT",
+          "parts": [
+            {
+              "text": "fetching AAPL over 1mo: Assess Apple's price performance over the last month"
+            }
+          ]
+        },
+        "timestamp": "2026-10-04T05:35:28.552305Z"
+      }
+    }
+  },
+  "id": "739f8aa8-0364-44b2-a583-68c2d321921a",
+  "jsonrpc": "2.0"
+}
+
+
+
+<-- from agent
+252
+data: {
+  "result": {
+    "artifactUpdate": {
+      "taskId": "156601dd-72f5-4784-b91d-58a03101ac5f",
+      "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+      "artifact": {
+        "artifactId": "6cc15a87-1b84-4780-bdfa-919162dc2b0e",
+        "name": "brief",
+        "parts": [
+          {
+            "text": "Apple rose 1.7% over the month, from $328.21 on September 3 to $333.69 on October 2. It fell to a closing low of $315.34 on September 9, then rebounded to a monthly closing high of $341.07 on September 25. It finished below that peak, with a choppy retreat in the final week."
+          }
+        ]
+      }
+    }
+  },
+  "id": "739f8aa8-0364-44b2-a583-68c2d321921a",
+  "jsonrpc": "2.0"
+}
+
+
+
+<-- from agent
+128
+data: {
+  "result": {
+    "statusUpdate": {
+      "taskId": "156601dd-72f5-4784-b91d-58a03101ac5f",
+      "contextId": "3c2d05f6-6f93-4a6b-b694-8eb0a5c76be6",
+      "status": {
+        "state": "TASK_STATE_COMPLETED",
+        "timestamp": "2026-10-04T05:35:33.769459Z"
+      }
+    }
+  },
+  "id": "739f8aa8-0364-44b2-a583-68c2d321921a",
+  "jsonrpc": "2.0"
+}
+
+
+
+<-- from agent
+0
+
+
