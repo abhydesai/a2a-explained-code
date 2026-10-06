@@ -89,4 +89,4 @@ plan carries no history.
 - Video 09 puts the analyst's lookup behind MCP: reuse the stock server from
   `../mcp-explained-code/06-stock-server/` as-is.
 - Every video that shows code pins a commit of this repo; keep history clean enough
-  to pin. GitHub remote: https://github.com/rt-adesai/a2a-explained-code
+  to pin. GitHub remote: https://github.com/abhydesai/a2a-explained-code

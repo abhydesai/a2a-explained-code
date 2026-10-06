@@ -1,7 +1,7 @@
 # A2A Explained — companion code
 
 Runnable code for the **A2A Explained** video series, the sequel to
-[MCP Explained](https://github.com/rt-adesai/mcp-explained-code). Every video that
+[MCP Explained](https://github.com/abhydesai/mcp-explained-code). Every video that
 shows code will have its code here in full, in the exact form that video shows it:
 clone the repo, `cd` into the video's folder, and run it.
 
