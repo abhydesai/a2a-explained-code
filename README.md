@@ -5,6 +5,8 @@ Runnable code for the **A2A Explained** video series, the sequel to
 shows code will have its code here in full, in the exact form that video shows it:
 clone the repo, `cd` into the video's folder, and run it.
 
+Watch the videos on Clyep: [A2A Explained](https://clyep.io/series/a2a-explained/).
+
 The series follows one running example, **the analyst**: a stock brief agent served
 over the Agent2Agent protocol with the Python `a2a-sdk`. Ask it about a ticker over
 a period and it fetches the price history, decides what is worth saying, and returns
